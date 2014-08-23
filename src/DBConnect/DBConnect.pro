@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-#   DBConnectMainWindowMainWindow QMake file.
+#   DBConnect QMake file.
 #   Author: Benjamin YanXiang Huang
 #
 #-------------------------------------------------
@@ -11,17 +11,17 @@ QT  += gui          # for developing GUI apps.
 QT  += sql          # database connection
 
 # executable name
-TARGET = DBConnectMainWindowMainWindow
+TARGET = DBConnect
 
 TEMPLATE = app
 
 #
 # Configure release & debug build directories.
 #
-BUILDDIRWIN32DBG = Build/DBConnect-Win32-Debug
-BUILDDIRWIN32REL = Build/DBConnect-Win32-Release
-BUILDDIRUNIXDBG  = Build/DBConnect-Unix-Debug
-BUILDDIRUNIXREL  = Build/DBConnect-Unix-Release
+BUILDDIRWIN32DBG = ../../build-output/DBConnect-Win32-Debug
+BUILDDIRWIN32REL = ../../build-output/DBConnect-Win32-Release
+BUILDDIRUNIXDBG  = ../../build-output/DBConnect-Unix-Debug
+BUILDDIRUNIXREL  = ../../build-output/DBConnect-Unix-Release
 CONFIG(debug, debug|release) { # Debug build dirs
     win32:DESTDIR       = $${BUILDDIRWIN32DBG}/
     win32:OBJECTS_DIR   = $${BUILDDIRWIN32DBG}/obj
