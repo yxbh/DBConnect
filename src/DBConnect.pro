@@ -91,9 +91,6 @@ QMAKE_CXXFLAGS_THREAD
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wunused-function
 
-#CONFIG += console
-CONFIG += c++11
-
 #
 # libraries
 #
