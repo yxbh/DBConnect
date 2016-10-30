@@ -63,5 +63,5 @@ Deploy/
 *.DEBUG
 *.RELEASE
 *.rc
-DBConnect/version.hpp
-DBConnect/appinfo.hpp
+version.hpp
+appinfo.hpp
