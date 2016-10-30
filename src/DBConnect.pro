@@ -17,8 +17,8 @@ TEMPLATE = app
 #
 # Version configuration
 #
-APP_VERSION_MAJOR = 1
-APP_VERSION_MINOR = 0
+APP_VERSION_MAJOR = 0
+APP_VERSION_MINOR = 7
 APP_VERSION_PATCH = 0
 VERSION = $${APP_VERSION_MAJOR}.$${APP_VERSION_MINOR}.$${APP_VERSION_PATCH}.000
 #
@@ -102,18 +102,17 @@ unix:LIBS += -L/usr/lib/x86_64-linux-gnu/mesa/
 HEADERS += \
     Controllers/DBConnectMainWindow.hpp \
     Controllers/AboutDialog.hpp \
-    Controllers/ChangeLogDialog.hpp
+    Config.hpp
 
 SOURCES += \
     main.cpp \
     Controllers/DBConnectMainWindow.cpp \
     Controllers/AboutDialog.cpp \
-    Controllers/ChangeLogDialog.cpp
+    Config.cpp
 
 FORMS += \
     UI/DBConnectMainWindow.ui \
-    UI/AboutDialog.ui \
-    UI/ChangeLogDialog.ui
+    UI/AboutDialog.ui
 #
 
 #

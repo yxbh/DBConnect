@@ -1,180 +1,193 @@
 #include "DBConnectMainWindow.hpp"
 #include "ui_DBConnectMainWindow.h"
-
-#include "AboutDialog.hpp"
-#include "ChangeLogDialog.hpp"
-
 #include <QDebug>
 #include <QSplitterHandle>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
 
+#include "AboutDialog.hpp"
+#include "ChangeLogDialog.hpp"
+#include "Config.hpp"
 
-DBConnectMainWindow::DBConnectMainWindow(QWidget * p_pParent)
-    : QMainWindow(p_pParent)
-    , m_pUi(new Ui::DBConnectMainWindow)
+DBConnectMainWindow::DBConnectMainWindow(QWidget * parent)
+    : QMainWindow(parent)
+    , ui(new Ui::DBConnectMainWindow)
 {
-    m_pUi->setupUi(this);
+    this->ui->setupUi(this);
+    this->readSettings();
+
 
     //// auto fit cell to content (DISABLED DUE TO PERFORMANCE HIT).
-    //m_pUi->tableView_QueryResult->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    //m_pUi->tableView_QueryResult->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    //ui->tableView_QueryResult->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    //ui->tableView_QueryResult->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     // connect model to table view.
-    m_pUi->tableView_QueryResult->setModel(&m_FullFetchModel);
+    ui->tableView_QueryResult->setModel(&fullFetchModel);
 
     // set flags
-    m_Stream = m_pUi->checkBox_Stream->isChecked();
+    isInStreamMode = ui->checkBox_Stream->isChecked();
 }
 
 DBConnectMainWindow::~DBConnectMainWindow(void)
 {
-    delete m_pUi;
+    delete ui;
+}
+
+void DBConnectMainWindow::readSettings(void)
+{
+    this->move(Config::getMainWindowPosition());
+    this->resize(Config::getMainWindowSize());
+}
+
+void DBConnectMainWindow::writeSettings(void)
+{
+    Config::saveMainWindowPosition(this->pos());
+    Config::saveMainWindowSize(this->size());
 }
 
 void DBConnectMainWindow::disconnect(void)
 {
     // clear query associated with DB.
-    m_QueryModel.setQuery(QSqlQuery());
+    queryModel.setQuery(QSqlQuery());
 
     // clear model and close database.
-    m_QueryModel.clear();
-    m_FullFetchModel.clear();
-    m_DbConnection.close();
+    queryModel.clear();
+    fullFetchModel.clear();
+    dbConnection.close();
 
     // remove the connection.
-    QString connection_name(m_DbConnection.connectionName());
-    m_DbConnection = QSqlDatabase();
-    m_DbConnection.removeDatabase(connection_name);
+    QString connection_name(dbConnection.connectionName());
+    dbConnection = QSqlDatabase();
+    dbConnection.removeDatabase(connection_name);
 }
 
 void DBConnectMainWindow::connect_via_odbc(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("QODBC3");
-    if (!m_DbConnection.isValid())
+    dbConnection = QSqlDatabase::addDatabase("QODBC3");
+    if (!dbConnection.isValid())
     {
-        m_pUi->statusbar->showMessage("Invalid driver type: QODBC3");
+        ui->statusbar->showMessage("Invalid driver type: QODBC3");
         return;
     }
 
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
     QString connection_option;
-    connection_option += "Driver={" + m_pUi->lineEdit_DBDriver->text() + "};"
-            "Protocol=" + m_pUi->lineEdit_DBProtocol->text() + ";"
-            "Hostname=" + m_pUi->lineEdit_DBHostName->text() + ";"
-            "Port=" + m_pUi->lineEdit_DBPort->text() + ";"
-            "DATABASE=" + m_pUi->lineEdit_DBDatabase->text() + ";";
-    m_DbConnection.setDatabaseName(connection_option);
+    connection_option += "Driver={" + ui->lineEdit_DBDriver->text() + "};"
+            "Protocol=" + ui->lineEdit_DBProtocol->text() + ";"
+            "Hostname=" + ui->lineEdit_DBHostName->text() + ";"
+            "Port=" + ui->lineEdit_DBPort->text() + ";"
+            "DATABASE=" + ui->lineEdit_DBDatabase->text() + ";";
+    dbConnection.setDatabaseName(connection_option);
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_to_db2(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("QODBC3");
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase("QODBC3");
+    if (!dbConnection.isValid()) return;
 
-    m_DbConnection.setConnectOptions("SQL_ATTR_ODBC_VERSION = SQL_OV_ODBC3");
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
+    dbConnection.setConnectOptions("SQL_ATTR_ODBC_VERSION = SQL_OV_ODBC3");
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
 
     //// with QODBC3
     QString connection_option;
-    connection_option += "Driver={" + m_pUi->lineEdit_DBDriver->text() + "};"
-            "Protocol=" + m_pUi->lineEdit_DBProtocol->text() + ";"
-            "Hostname=" + m_pUi->lineEdit_DBHostName->text() + ";"
-            "Port=" + m_pUi->lineEdit_DBPort->text() + ";"
-            "DATABASE=" + m_pUi->lineEdit_DBDatabase->text() + ";";
-    m_DbConnection.setDatabaseName(connection_option);
+    connection_option += "Driver={" + ui->lineEdit_DBDriver->text() + "};"
+            "Protocol=" + ui->lineEdit_DBProtocol->text() + ";"
+            "Hostname=" + ui->lineEdit_DBHostName->text() + ";"
+            "Port=" + ui->lineEdit_DBPort->text() + ";"
+            "DATABASE=" + ui->lineEdit_DBDatabase->text() + ";";
+    dbConnection.setDatabaseName(connection_option);
 
     //// with QDB2
-//    m_DbConnection.setHostName(m_pUi->lineEdit_DBHostName->text());
-//    m_DbConnection.setDatabaseName(m_pUi->lineEdit_DBDatabase->text());
-//    m_DbConnection.setPort(m_pUi->lineEdit_DBPort->text().toInt());
+//    dbConnection.setHostName(ui->lineEdit_DBHostName->text());
+//    dbConnection.setDatabaseName(ui->lineEdit_DBDatabase->text());
+//    dbConnection.setPort(ui->lineEdit_DBPort->text().toInt());
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_to_sqlite3(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("QSQLITE");
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase("QSQLITE");
+    if (!dbConnection.isValid()) return;
 
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
-    m_DbConnection.setDatabaseName(m_pUi->lineEdit_DBDatabase->text());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
+    dbConnection.setDatabaseName(ui->lineEdit_DBDatabase->text());
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_to_sqlite2(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("QSQLITE2");
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase("QSQLITE2");
+    if (!dbConnection.isValid()) return;
 
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
-    m_DbConnection.setDatabaseName(m_pUi->lineEdit_DBDatabase->text());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
+    dbConnection.setDatabaseName(ui->lineEdit_DBDatabase->text());
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_to_mysql(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("QMySQL");
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase("QMySQL");
+    if (!dbConnection.isValid()) return;
 
-    m_DbConnection.setHostName(m_pUi->lineEdit_DBHostName->text());
-    m_DbConnection.setPort(m_pUi->lineEdit_DBPort->text().toInt());
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
-    m_DbConnection.setDatabaseName(m_pUi->lineEdit_DBDatabase->text());
+    dbConnection.setHostName(ui->lineEdit_DBHostName->text());
+    dbConnection.setPort(ui->lineEdit_DBPort->text().toInt());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
+    dbConnection.setDatabaseName(ui->lineEdit_DBDatabase->text());
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_generic(void)
 {
     // select driver type.
-    m_DbConnection = QSqlDatabase::addDatabase(m_pUi->comboBox_DBDriverType->currentText());
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase(ui->comboBox_DBDriverType->currentText());
+    if (!dbConnection.isValid()) return;
 
     // set connection parameters.
-    m_DbConnection.setHostName(m_pUi->lineEdit_DBHostName->text());
-    m_DbConnection.setPort(m_pUi->lineEdit_DBPort->text().toInt());
-    m_DbConnection.setDatabaseName(m_pUi->lineEdit_DBDatabase->text());
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
+    dbConnection.setHostName(ui->lineEdit_DBHostName->text());
+    dbConnection.setPort(ui->lineEdit_DBPort->text().toInt());
+    dbConnection.setDatabaseName(ui->lineEdit_DBDatabase->text());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
 
     // connect.
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::connect_via_fastodbc(void)
 {
-    m_DbConnection = QSqlDatabase::addDatabase("FastODBC");
-    if (!m_DbConnection.isValid()) return;
+    dbConnection = QSqlDatabase::addDatabase("FastODBC");
+    if (!dbConnection.isValid()) return;
 
-    m_DbConnection.setUserName(m_pUi->lineEdit_DBUsername->text());
-    m_DbConnection.setPassword(m_pUi->lineEdit_DBUserpassword->text());
+    dbConnection.setUserName(ui->lineEdit_DBUsername->text());
+    dbConnection.setPassword(ui->lineEdit_DBUserpassword->text());
 
     //// with FastODBC, similar to QODBC3
     QString connection_option;
-    connection_option += "Driver={" + m_pUi->lineEdit_DBDriver->text() + "};"
-            "Protocol=" + m_pUi->lineEdit_DBProtocol->text() + ";"
-            "Hostname=" + m_pUi->lineEdit_DBHostName->text() + ";"
-            "Port=" + m_pUi->lineEdit_DBPort->text() + ";"
-            "DATABASE=" + m_pUi->lineEdit_DBDatabase->text() + ";";
-    m_DbConnection.setDatabaseName(connection_option);
+    connection_option += "Driver={" + ui->lineEdit_DBDriver->text() + "};"
+            "Protocol=" + ui->lineEdit_DBProtocol->text() + ";"
+            "Hostname=" + ui->lineEdit_DBHostName->text() + ";"
+            "Port=" + ui->lineEdit_DBPort->text() + ";"
+            "DATABASE=" + ui->lineEdit_DBDatabase->text() + ";";
+    dbConnection.setDatabaseName(connection_option);
 
-    m_DbConnection.open();
+    dbConnection.open();
 }
 
 void DBConnectMainWindow::hideConnectionPanel(void)
 {
-    auto * const wksp_splitter = m_pUi->splitter_ConnectionAndWorkspace;
+    auto * const wksp_splitter = ui->splitter_ConnectionAndWorkspace;
     auto sizes = wksp_splitter->sizes();
     sizes[0] = 0; // connection panel is 1st widget.
     wksp_splitter->setSizes(sizes);
@@ -182,10 +195,17 @@ void DBConnectMainWindow::hideConnectionPanel(void)
 
 void DBConnectMainWindow::showConnectionPanel(void)
 {
-    auto * const wksp_splitter = m_pUi->splitter_ConnectionAndWorkspace;
+    auto * const wksp_splitter = ui->splitter_ConnectionAndWorkspace;
     auto sizes = wksp_splitter->sizes();
     sizes[0] = wksp_splitter->widget(0)->maximumHeight(); // connection panel is 1st widget.
     wksp_splitter->setSizes(sizes);
+}
+
+void DBConnectMainWindow::closeEvent(QCloseEvent * event)
+{
+    this->writeSettings();
+
+    this->QMainWindow::closeEvent(event);
 }
 
 void DBConnectMainWindow::on_pushButton_ConnectDB_clicked(void)
@@ -194,7 +214,7 @@ void DBConnectMainWindow::on_pushButton_ConnectDB_clicked(void)
     this->disconnect();
 
     // set new connection parameters.
-    const QString & requested_db_type(m_pUi->comboBox_DBDriverType->currentText());
+    const QString & requested_db_type(ui->comboBox_DBDriverType->currentText());
     if (requested_db_type == "ODBC3" || requested_db_type == "ODBC")
         this->connect_via_odbc();
     else if (requested_db_type == "DB2")
@@ -209,92 +229,92 @@ void DBConnectMainWindow::on_pushButton_ConnectDB_clicked(void)
         this->connect_generic();
 
     // check for connection error.
-    if (!m_DbConnection.isValid())
+    if (!dbConnection.isValid())
     {
-        m_pUi->statusbar->showMessage("Invalid driver type: " + m_pUi->comboBox_DBDriverType->currentText());
+        ui->statusbar->showMessage("Invalid driver type: " + ui->comboBox_DBDriverType->currentText());
     }
-    else if (m_DbConnection.isOpenError() || !m_DbConnection.isOpen())
+    else if (dbConnection.isOpenError() || !dbConnection.isOpen())
     {
-        QString db_error_msg(m_DbConnection.lastError().text().trimmed());
+        QString db_error_msg(dbConnection.lastError().text().trimmed());
         if (db_error_msg.length() > 0)
-            m_pUi->plainTextEdit_Result->setPlainText(db_error_msg);
+            ui->plainTextEdit_Result->setPlainText(db_error_msg);
         else
-            m_pUi->plainTextEdit_Result->setPlainText("Oh no! There're no error message...");
-        m_pUi->statusbar->showMessage("Failure to connect!");
+            ui->plainTextEdit_Result->setPlainText("Oh no! There're no error message...");
+        ui->statusbar->showMessage("Failure to connect!");
     }
     else
     {
         this->hideConnectionPanel();
-        m_pUi->plainTextEdit_Result->clear();
-        m_pUi->statusbar->showMessage("Database connection successful!", 3000);
+        ui->plainTextEdit_Result->clear();
+        ui->statusbar->showMessage("Database connection successful!", 3000);
     }
 }
 
 void DBConnectMainWindow::on_pushButton_SubmitQuery_clicked(void)
 {
     // clear current result
-    m_pUi->pushButton_ClearResult->click();
+    ui->pushButton_ClearResult->click();
 
     // check DB connection valid and open.
-    if (!m_DbConnection.isValid() || !m_DbConnection.isOpen())
+    if (!dbConnection.isValid() || !dbConnection.isOpen())
     {
-        m_pUi->statusbar->showMessage("Database invalid or not connected!");
+        ui->statusbar->showMessage("Database invalid or not connected!");
         return;
     }
 
     // prepare query and execute.
-    m_pUi->statusbar->showMessage("Submitting query...");
-    QSqlQuery query(m_DbConnection);
-    if (!m_Stream) query.setForwardOnly(true);
-    query.prepare(m_pUi->plainTextEdit_SQLQuery->toPlainText());
+    ui->statusbar->showMessage("Submitting query...");
+    QSqlQuery query(dbConnection);
+    if (!isInStreamMode) query.setForwardOnly(true);
+    query.prepare(ui->plainTextEdit_SQLQuery->toPlainText());
     query.exec();
 
     // check execution result.
     if (!query.isActive())
     {
-        m_pUi->plainTextEdit_Result->setPlainText("query failure!");
-        m_pUi->plainTextEdit_Result->appendPlainText("SQL: " + m_pUi->plainTextEdit_SQLQuery->toPlainText());
-        m_pUi->plainTextEdit_Result->appendPlainText("Error: " + query.lastError().text());
-        m_pUi->statusbar->showMessage("Error executing query!");
+        ui->plainTextEdit_Result->setPlainText("query failure!");
+        ui->plainTextEdit_Result->appendPlainText("SQL: " + ui->plainTextEdit_SQLQuery->toPlainText());
+        ui->plainTextEdit_Result->appendPlainText("Error: " + query.lastError().text());
+        ui->statusbar->showMessage("Error executing query!");
         return;
     }
     else
     {
-        m_pUi->plainTextEdit_Result->clear();
-        m_pUi->statusbar->showMessage("Query execution sucessful!");
+        ui->plainTextEdit_Result->clear();
+        ui->statusbar->showMessage("Query execution sucessful!");
     }
 
     // fill in differentmodel depending on fetch mode.
-    m_pUi->statusbar->showMessage("Fetching result data...");
-    if (!m_Stream)
+    ui->statusbar->showMessage("Fetching result data...");
+    if (!isInStreamMode)
     {
         int row = 0;
         // fill in header
         for (int field = 0; field < query.record().count(); ++field)
-            m_FullFetchModel.setHorizontalHeaderItem(field, new QStandardItem(query.record().fieldName(field)));
+            fullFetchModel.setHorizontalHeaderItem(field, new QStandardItem(query.record().fieldName(field)));
 
         // fill in table
         while (query.next())
         {
-            //m_pUi->statusbar->showMessage("Fetching row " + QString::number(row+1));
+            //ui->statusbar->showMessage("Fetching row " + QString::number(row+1));
             for (int field = 0; field < query.record().count(); ++field)
-                m_FullFetchModel.setItem(row, field, new QStandardItem(query.value(field).toString().trimmed()));
+                fullFetchModel.setItem(row, field, new QStandardItem(query.value(field).toString().trimmed()));
             ++row;
 
             // process application events.
             //QApplication::processEvents();
         }
 
-        m_pUi->tableView_QueryResult->resizeColumnsToContents();
+        ui->tableView_QueryResult->resizeColumnsToContents();
 
-        m_pUi->statusbar->showMessage("Fetch completed!", 3000);
+        ui->statusbar->showMessage("Fetch completed!", 3000);
     }
     else
     {
-        m_QueryModel.setQuery(query);
-        while (m_QueryModel.canFetchMore())
+        queryModel.setQuery(query);
+        while (queryModel.canFetchMore())
         {
-            m_QueryModel.fetchMore();
+            queryModel.fetchMore();
 
             // process application events.
             //QApplication::processEvents();
@@ -309,7 +329,7 @@ void DBConnectMainWindow::on_action_About_triggered(void)
 
 void DBConnectMainWindow::on_action_SubmitSQL_triggered(void)
 {
-    m_pUi->pushButton_SubmitQuery->click();
+    ui->pushButton_SubmitQuery->click();
 }
 
 void DBConnectMainWindow::on_action_Quit_triggered(void)
@@ -321,100 +341,100 @@ void DBConnectMainWindow::on_comboBox_DBDriverType_currentTextChanged(const QStr
 {
     const QString db_type = p_rDbType.toUpper();
 
-    m_pUi->lineEdit_DBProtocol->setText("TCPIP");
+    ui->lineEdit_DBProtocol->setText("TCPIP");
 
     if (db_type == "DB2")
     {
-        m_pUi->lineEdit_DBDriver->setText("IBM DB2 ODBC DRIVER");
+        ui->lineEdit_DBDriver->setText("IBM DB2 ODBC DRIVER");
     }
     else if (db_type == "SQLITE3" ||
              db_type == "SQLITE2" ||
              db_type == "MySQL")
     {
-        m_pUi->lineEdit_DBDriver->setText("");
-        m_pUi->lineEdit_DBHostName->setText("");
-        m_pUi->lineEdit_DBDatabase->setText("");
-        m_pUi->lineEdit_DBProtocol->setText("");
-        m_pUi->lineEdit_DBPort->setText("");
+        ui->lineEdit_DBDriver->setText("");
+        ui->lineEdit_DBHostName->setText("");
+        ui->lineEdit_DBDatabase->setText("");
+        ui->lineEdit_DBProtocol->setText("");
+        ui->lineEdit_DBPort->setText("");
     }
     else
     {
-        m_pUi->lineEdit_DBDriver->setText("");
-        m_pUi->lineEdit_DBHostName->setText("");
-        m_pUi->lineEdit_DBDatabase->setText("");
-        m_pUi->lineEdit_DBProtocol->setText("");
-        m_pUi->lineEdit_DBPort->setText("");
+        ui->lineEdit_DBDriver->setText("");
+        ui->lineEdit_DBHostName->setText("");
+        ui->lineEdit_DBDatabase->setText("");
+        ui->lineEdit_DBProtocol->setText("");
+        ui->lineEdit_DBPort->setText("");
     }
 }
 
 void DBConnectMainWindow::on_pushButton_DisconnectDB_clicked(void)
 {
     this->disconnect();
-    m_pUi->statusbar->showMessage("Disconnected!", 2000);
+    ui->statusbar->showMessage("Disconnected!", 2000);
 }
 
 void DBConnectMainWindow::on_pushButton_ClearSQLStatement_clicked(void)
 {
-    m_pUi->plainTextEdit_SQLQuery->clear();
+    ui->plainTextEdit_SQLQuery->clear();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBUserpassword_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBUsername_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBProtocol_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBPort_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBHostName_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBDatabase_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_lineEdit_DBDriver_returnPressed(void)
 {
-    m_pUi->pushButton_ConnectDB->click();
+    ui->pushButton_ConnectDB->click();
 }
 
 void DBConnectMainWindow::on_pushButton_ClearResult_clicked(void)
 {
-    m_QueryModel.setQuery(QSqlQuery());
-    m_FullFetchModel.clear();
+    queryModel.setQuery(QSqlQuery());
+    fullFetchModel.clear();
 }
 
 void DBConnectMainWindow::on_checkBox_Stream_toggled(bool p_Checked)
 {
-    m_Stream = p_Checked;
-    if (m_Stream)
-        m_pUi->tableView_QueryResult->setModel(&m_QueryModel);
+    isInStreamMode = p_Checked;
+    if (isInStreamMode)
+        ui->tableView_QueryResult->setModel(&queryModel);
     else
-        m_pUi->tableView_QueryResult->setModel(&m_FullFetchModel);
-}
-
-void DBConnectMainWindow::on_action_ChangeLogs_triggered(void)
-{
-    (new ChangeLogDialog(this))->show();
+        ui->tableView_QueryResult->setModel(&fullFetchModel);
 }
 
 void DBConnectMainWindow::on_action_ShowConnectionPanel_triggered(void)
 {
-    auto * const wksp_splitter = m_pUi->splitter_ConnectionAndWorkspace;
+    auto * const wksp_splitter = ui->splitter_ConnectionAndWorkspace;
     wksp_splitter->sizes()[0] == 0 ? this->showConnectionPanel() : this->hideConnectionPanel();
+}
+
+void DBConnectMainWindow::on_action_AboutQt_triggered(void)
+{
+    qApp->aboutQt();
 }

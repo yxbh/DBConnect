@@ -21,19 +21,22 @@ class DBConnectMainWindow
     Q_OBJECT
 
 private:
-    Ui::DBConnectMainWindow * m_pUi;
+    Ui::DBConnectMainWindow * ui;
 
-    QSqlDatabase        m_DbConnection;
-    QSqlQueryModel      m_QueryModel;
-    QStandardItemModel  m_FullFetchModel;
+    QSqlDatabase        dbConnection;
+    QSqlQueryModel      queryModel;
+    QStandardItemModel  fullFetchModel;
 
-    bool                m_Stream;
+    bool                isInStreamMode;
 
 public:
-    explicit DBConnectMainWindow(QWidget * p_pParent = nullptr);
+    explicit DBConnectMainWindow(QWidget * parent = nullptr);
     ~DBConnectMainWindow(void);
 
 private:
+    void readSettings(void);
+    void writeSettings(void);
+
     /** Disconnect the current database connection. */
     void disconnect(void);
 
@@ -57,6 +60,8 @@ private:
     /** Show the connection panel. */
     void showConnectionPanel(void);
 
+    virtual void closeEvent(QCloseEvent * event) final;
+
 private slots:
     void on_pushButton_ConnectDB_clicked(void);
     void on_pushButton_SubmitQuery_clicked(void);
@@ -75,8 +80,8 @@ private slots:
     void on_lineEdit_DBDriver_returnPressed(void);
     void on_checkBox_Stream_toggled(bool p_Checked);
     void on_pushButton_ClearResult_clicked(void);
-    void on_action_ChangeLogs_triggered(void);
     void on_action_ShowConnectionPanel_triggered(void);
+    void on_action_AboutQt_triggered(void);
 }; // DBConnectMainWindow class
 
 #endif // DBCONNECT_HPP
