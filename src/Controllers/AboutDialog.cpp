@@ -1,11 +1,12 @@
 #include "AboutDialog.hpp"
 #include "ui_AboutDialog.h"
 
-AboutDialog::AboutDialog(QWidget * p_pParent) :
-    QDialog(p_pParent),
-    m_pUi(new Ui::AboutDialog)
+AboutDialog::AboutDialog(QWidget * parent) :
+    QDialog(parent),
+    ui(new Ui::AboutDialog)
 {
-    m_pUi->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->ui->setupUi(this);
 
     // disable resizing.
     this->setFixedSize(this->size());
@@ -13,5 +14,5 @@ AboutDialog::AboutDialog(QWidget * p_pParent) :
 
 AboutDialog::~AboutDialog(void)
 {
-    delete m_pUi;
+    delete ui;
 }
