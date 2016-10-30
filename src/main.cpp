@@ -1,6 +1,6 @@
-#include "DBConnectMainWindow.hpp"
-
 #include <QApplication>
+#include "Controllers/DBConnectMainWindow.hpp"
+
 
 int main(int argc, char ** argv)
 {
