@@ -102,21 +102,21 @@ unix:LIBS += -L/usr/lib/x86_64-linux-gnu/mesa/
 #
 # source files
 #
+HEADERS += \
+    Controllers/DBConnectMainWindow.hpp \
+    Controllers/AboutDialog.hpp \
+    Controllers/ChangeLogDialog.hpp
+
 SOURCES += \
-    ../main.cpp \
-    ../DBConnectMainWindow.cpp \
-    ../AboutDialog.cpp \
-    ../ChangeLogDialog.cpp
+    main.cpp \
+    Controllers/DBConnectMainWindow.cpp \
+    Controllers/AboutDialog.cpp \
+    Controllers/ChangeLogDialog.cpp
 
 FORMS += \
-    ../DBConnectMainWindow.ui \
-    ../AboutDialog.ui \
-    ../ChangeLogDialog.ui
-
-HEADERS += \
-    ../DBConnectMainWindow.hpp \
-    ../AboutDialog.hpp \
-    ../ChangeLogDialog.hpp
+    UI/DBConnectMainWindow.ui \
+    UI/AboutDialog.ui \
+    UI/ChangeLogDialog.ui
 #
 
 #
