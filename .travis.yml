@@ -20,9 +20,9 @@ install:
   - if [ "$QT_BASE" = "57" ]; then sudo apt-get install -qq qt57base; source /opt/qt57/bin/qt57-env.sh; fi
 
 script:
-  - qmake src/DBConnect.pro -r "CONFIG+=debug"
   - cd src
-  - make -f Makefile.Debug
+  - qmake DBConnect.pro -r "CONFIG+=debug"
+  - make
 
 notifications:
   email: false
