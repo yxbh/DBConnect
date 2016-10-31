@@ -7,7 +7,6 @@
 #include <QSqlError>
 
 #include "AboutDialog.hpp"
-#include "ChangeLogDialog.hpp"
 #include "Config.hpp"
 
 DBConnectMainWindow::DBConnectMainWindow(QWidget * parent)
