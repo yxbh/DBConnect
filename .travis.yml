@@ -22,7 +22,7 @@ install:
 script:
   - qmake src/DBConnect.pro -r "CONFIG+=debug"
   - cd src
-  - make Makefile.Debug
+  - make -f Makefile.Debug
 
 notifications:
   email: false
