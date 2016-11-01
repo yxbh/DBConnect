@@ -1,11 +1,11 @@
 # go to source directory.
 pwd
-cd OverwatchPlayerLog
+cd src
 
 # build DEBUG build.
-qmake OverwatchPlayerLog.pro "CONFIG+=debug"
+qmake DBConnect.pro "CONFIG+=debug"
 mingw32-make
 
 # build RELEASE build.
-qmake OverwatchPlayerLog.pro
+qmake DBConnect.pro
 mingw32-make
