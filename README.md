@@ -7,3 +7,15 @@
 [![Github All Releases](https://img.shields.io/github/downloads/yxbh/DBConnect/total.svg)](https://github.com/vlc-qt/vlc-qt/releases)
 
 A useful GUI utility for quickly connecting to a SQL database and execute queries. Support for different SQl database types.
+
+##Copyright
+
+Copyright 2014-2016 Benjamin YanXiang Huang
+
+##License
+
+See LICENSE file for license information.
+
+##Warranty
+
+See LICENSE file for warranty information
