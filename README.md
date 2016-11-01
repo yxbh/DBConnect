@@ -12,9 +12,11 @@ A useful GUI utility for quickly connecting to a SQL database and execute querie
 
 Copyright 2014-2016 Benjamin YanXiang Huang
 
+
 ##License
 
 See LICENSE file for license information.
+
 
 ##Warranty
 
