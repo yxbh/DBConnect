@@ -28,7 +28,7 @@ VERSION = $${APP_VERSION_MAJOR}.$${APP_VERSION_MINOR}.$${APP_VERSION_PATCH}.000
 #
 QMAKE_TARGET_COMPANY = Infinity Box Studio
 QMAKE_TARGET_PRODUCT = DBConnect
-QMAKE_TARGET_DESCRIPTION = A simple database utility.
+QMAKE_TARGET_DESCRIPTION = "A useful GUI utility for quickly connecting to a SQL database and execute queries. Support for different SQl database types."
 QMAKE_TARGET_COPYRIGHT = Copyright (c) 2016 Benjamin Huang.
 #
 
