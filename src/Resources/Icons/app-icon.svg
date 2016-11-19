@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="512px" height="511px" viewBox="0 0 512 511" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
-    <title>icon_512x512</title>
+    <title>Icon</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <ellipse id="path-1" cx="225" cy="225" rx="225" ry="225"></ellipse>
@@ -12,8 +12,8 @@
             <feColorMatrix values="0 0 0 0 0.397401148   0 0 0 0 0.397401148   0 0 0 0 0.397401148  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
         </filter>
         <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="68.0977858%" id="radialGradient-3">
-            <stop stop-color="#E6963E" offset="0%"></stop>
-            <stop stop-color="#EFAB5F" stop-opacity="0.854761096" offset="100%"></stop>
+            <stop stop-color="#D97100" offset="0%"></stop>
+            <stop stop-color="#CE7F26" stop-opacity="0.781504755" offset="100%"></stop>
         </radialGradient>
         <circle id="path-4" cx="225.5" cy="225.5" r="200.5"></circle>
         <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-5">
@@ -23,7 +23,7 @@
             <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
             <feColorMatrix values="0 0 0 0 0.753427934   0 0 0 0 0.614831475   0 0 0 0 0.268340327  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
         </filter>
-        <path d="M176.34853,87.2687755 L153.508278,87.2687755 C141.0548,121.502705 81.0563791,151.524129 65.8541371,146.934811 C57.7430067,144.486188 54.3958861,133.045225 53.0813915,119.50185 L26.7704299,119.50185 C18.6129467,119.50185 12,112.889326 12,104.728357 C12,96.5691829 18.6167101,89.954865 26.7704299,89.954865 L52.3776587,89.954865 C52.4526694,84.9288513 52.5416532,80.3157506 52.4888462,76.508478 C52.4271057,72.0571232 52.3349939,66.4806138 52.3935118,60.4078802 L26.7704299,60.4078802 C18.6129467,60.4078802 12,53.7953563 12,45.6343877 C12,37.4752132 18.6167101,30.8608953 26.7704299,30.8608953 L54.4370304,30.8608953 C56.4612854,18.0576942 60.3906901,7.37690409 67.9020209,4.64487289 C83.4094398,-0.995506053 146.291542,31.239086 154.819871,67.123104 L213.040352,67.123104 C213.85574,67.123104 214.640738,67.2528883 215.375713,67.4930339 C228.774316,69.6808569 239,81.3097822 239,95.3270441 C239,110.275736 227.370196,122.508142 212.664791,123.47006 C212.35107,123.51026 212.031336,123.530984 211.706842,123.530984 L170.280024,123.530984 C166.143118,123.530984 162.789493,120.181722 162.789493,116.02948 L162.789493,110.886817 C162.789493,106.743851 166.149136,103.385313 170.280024,103.385313 L177.020052,103.385313 L210.363798,103.385313 C214.494685,103.385313 217.854329,100.030991 217.854329,95.8932261 L217.854329,94.7608621 C217.854329,90.6277121 214.500704,87.2687755 210.363798,87.2687755 L176.34853,87.2687755 Z" id="path-6"></path>
+        <path d="M183.523739,87.2687755 L153.508278,87.2687755 C141.0548,121.502705 81.0563791,151.524129 65.8541371,146.934811 C57.7430067,144.486188 54.3958861,133.045225 53.0813915,119.50185 L26.7704299,119.50185 C18.6129467,119.50185 12,112.889326 12,104.728357 C12,96.5691829 18.6167101,89.954865 26.7704299,89.954865 L52.3776587,89.954865 C52.4526694,84.9288513 52.5416532,80.3157506 52.4888462,76.508478 C52.4271057,72.0571232 52.3349939,66.4806138 52.3935118,60.4078802 L26.7704299,60.4078802 C18.6129467,60.4078802 12,53.7953563 12,45.6343877 C12,37.4752132 18.6167101,30.8608953 26.7704299,30.8608953 L54.4370304,30.8608953 C56.4612854,18.0576942 60.3906901,7.37690409 67.9020209,4.64487289 C83.4094398,-0.995506053 146.291542,31.239086 154.819871,67.123104 L213.040352,67.123104 C213.85574,67.123104 214.640738,67.2528883 215.375713,67.4930339 C228.774316,69.6808569 239,81.3097822 239,95.3270441 C239,110.90365 226.372666,123.530984 210.79606,123.530984 C210.446494,123.530984 210.098413,123.524625 209.751927,123.512015 C209.545908,123.5246 209.338217,123.530984 209.129038,123.530984 L172.857828,123.530984 C167.29724,123.530984 162.789493,119.022445 162.789493,113.458148 C162.789493,107.895075 167.298375,103.385313 172.857828,103.385313 L183.523739,103.385313 L210.803289,103.385313 C215.247778,103.385313 218.854329,99.7775029 218.854329,95.3270441 C218.854329,90.885641 215.249755,87.2687755 210.803289,87.2687755 L183.523739,87.2687755 Z" id="path-6"></path>
         <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-7">
             <feMorphology radius="2" operator="erode" in="SourceAlpha" result="shadowSpreadInner1"></feMorphology>
             <feGaussianBlur stdDeviation="2" in="shadowSpreadInner1" result="shadowBlurInner1"></feGaussianBlur>
@@ -31,7 +31,7 @@
             <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
             <feColorMatrix values="0 0 0 0 0.588235294   0 0 0 0 0.588235294   0 0 0 0 0.588235294  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
         </filter>
-        <ellipse id="path-8" cx="156.5" cy="256" rx="22.5" ry="76"></ellipse>
+        <ellipse id="path-8" cx="125.5" cy="225" rx="22.5" ry="76"></ellipse>
         <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-9">
             <feMorphology radius="2" operator="erode" in="SourceAlpha" result="shadowSpreadInner1"></feMorphology>
             <feGaussianBlur stdDeviation="2" in="shadowSpreadInner1" result="shadowBlurInner1"></feGaussianBlur>
@@ -40,27 +40,29 @@
             <feColorMatrix values="0 0 0 0 0.589817177   0 0 0 0 0.589805541   0 0 0 0 0.589805541  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
         </filter>
     </defs>
-    <g id="v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon_512x512">
-            <g id="Plate" transform="translate(31.000000, 31.000000)">
+    <g id="Android" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="play/ic_launcher_APP" transform="translate(0.000000, -1.000000)">
+            <g id="Icon" transform="translate(6.000000, 6.000000)">
+                <g id="Plate">
+                    <g id="Oval">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#F4F3F3" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Oval-2">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill-opacity="0.899999976" fill="url(#radialGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                </g>
+                <g id="Plug" transform="translate(148.000000, 149.000000)">
+                    <g id="Combined-Shape">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-6"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                    </g>
+                </g>
                 <g id="Oval">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                    <use fill="#F4F3F3" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-8"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
                 </g>
-                <g id="Oval-2">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
-                    <use fill-opacity="0.899999976" fill="url(#radialGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
-                </g>
-            </g>
-            <g id="Plug" transform="translate(179.000000, 180.000000)">
-                <g id="Combined-Shape">
-                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-6"></use>
-                    <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
-                </g>
-            </g>
-            <g id="Oval">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-8"></use>
-                <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
             </g>
         </g>
     </g>
