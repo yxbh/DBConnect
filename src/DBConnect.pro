@@ -91,10 +91,6 @@ QMAKE_CXXFLAGS_THREAD
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wunused-function
 
-#
-# libraries
-#
-unix:LIBS += -L/usr/lib/x86_64-linux-gnu/mesa/
 
 #
 # source files
@@ -113,6 +109,20 @@ SOURCES += \
 FORMS += \
     UI/DBConnectMainWindow.ui \
     UI/AboutDialog.ui
+
+RESOURCES += \
+    resources.qrc
+#
+
+#
+# App icon configuration.
+#
+macx {
+    ICON = Resources/Icons/app-icon.icns
+}
+win32 {
+    RC_ICONS = Resources/Icons/app-icon.ico
+}
 #
 
 #
@@ -166,4 +176,3 @@ QMAKE_EXTRA_TARGETS += gen_appinfo
 PRE_TARGETDEPS += gen_appinfo
 HEADERS  += appinfo.hpp
 #
-
