@@ -1,1 +1,7 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Icons/app-icon.hqx</file>
+        <file alias="APP_ICON_OSX">Resources/Icons/app-icon.icns</file>
+        <file alias="APP_ICON">Resources/Icons/app-icon.ico</file>
+    </qresource>
+</RCC>
