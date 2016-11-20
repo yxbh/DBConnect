@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1122</width>
+    <width>964</width>
     <height>843</height>
    </rect>
   </property>
@@ -70,8 +70,8 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_DBDriverType">
+          <item row="1" column="8">
+           <widget class="QLabel" name="label_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -79,10 +79,26 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Driver type:</string>
+             <string>Password:</string>
             </property>
             <property name="buddy">
-             <cstring>comboBox_DBDriverType</cstring>
+             <cstring>lineEdit_DBUserpassword</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Database:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_DBDatabase</cstring>
             </property>
            </widget>
           </item>
@@ -135,8 +151,8 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_DBDriverType">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -144,15 +160,15 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Driver:</string>
+             <string>Driver type:</string>
             </property>
             <property name="buddy">
-             <cstring>lineEdit_DBDriver</cstring>
+             <cstring>comboBox_DBDriverType</cstring>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QLineEdit" name="lineEdit_DBDriver">
+          <item row="0" column="9">
+           <widget class="QLineEdit" name="lineEdit_DBHostName">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -161,7 +177,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>200</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -170,45 +186,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QLabel" name="label_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Database:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineEdit_DBDatabase</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QLineEdit" name="lineEdit_DBDatabase">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Database/Location</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="6">
+          <item row="0" column="8">
            <widget class="QLabel" name="label_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -224,100 +202,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="7">
-           <widget class="QLineEdit" name="lineEdit_DBHostName">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Protocol:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineEdit_DBProtocol</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_DBProtocol">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>TCPIP</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Port:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineEdit_DBPort</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLineEdit" name="lineEdit_DBPort">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QLabel" name="label_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>User name:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineEdit_DBUsername</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
+          <item row="1" column="7">
            <widget class="QLineEdit" name="lineEdit_DBUsername">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -330,23 +215,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="6">
-           <widget class="QLabel" name="label_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Password:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineEdit_DBUserpassword</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="7">
+          <item row="1" column="9">
            <widget class="QLineEdit" name="lineEdit_DBUserpassword">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -368,6 +237,149 @@
             </property>
             <property name="clearButtonEnabled">
              <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="7">
+           <widget class="QLineEdit" name="lineEdit_DBDatabase">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Database/Location</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="label_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>User name:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_DBUsername</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Port:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_DBPort</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="lineEdit_DBProtocol">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>TCPIP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Protocol:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_DBProtocol</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLineEdit" name="lineEdit_DBPort">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Driver:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_DBDriver</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="5">
+           <widget class="QLineEdit" name="lineEdit_DBDriver">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -541,123 +553,85 @@
          <property name="title">
           <string>Query</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <property name="leftMargin">
-           <number>4</number>
-          </property>
-          <property name="topMargin">
-           <number>4</number>
-          </property>
-          <property name="rightMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetNoConstraint</enum>
-            </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPlainTextEdit" name="plainTextEdit_SQLQuery">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <widget class="QPushButton" name="pushButton_ClearResult">
+              <property name="toolTip">
+               <string>Clear the result panel.</string>
               </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="plainText">
-               <string/>
-              </property>
-              <property name="tabStopWidth">
-               <number>20</number>
+              <property name="text">
+               <string>Clear Result</string>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_2">
-              <item>
-               <spacer name="verticalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Preferred</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>10</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="checkBox_Stream">
-                <property name="toolTip">
-                 <string>Fetch all result at once or stream as you scroll.</string>
-                </property>
-                <property name="text">
-                 <string>Stream</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_SubmitQuery">
-                <property name="toolTip">
-                 <string>Submit the SQl query.</string>
-                </property>
-                <property name="text">
-                 <string>Submit</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_ClearSQLStatement">
-                <property name="toolTip">
-                 <string>Clear the query input panel.</string>
-                </property>
-                <property name="text">
-                 <string>Clear</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_ClearResult">
-                <property name="toolTip">
-                 <string>Clear the result panel.</string>
-                </property>
-                <property name="text">
-                 <string>Clear Result</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::MinimumExpanding</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
+             <widget class="QPushButton" name="pushButton_ClearSQLStatement">
+              <property name="toolTip">
+               <string>Clear the query input panel.</string>
+              </property>
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_Stream">
+              <property name="toolTip">
+               <string>Fetch all result at once or stream as you scroll.</string>
+              </property>
+              <property name="text">
+               <string>Stream</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_SubmitQuery">
+              <property name="toolTip">
+               <string>Submit the SQl query.</string>
+              </property>
+              <property name="text">
+               <string>Submit</string>
+              </property>
+             </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="plainTextEdit_SQLQuery">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="plainText">
+             <string/>
+            </property>
+            <property name="tabStopWidth">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -713,7 +687,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1122</width>
+     <width>964</width>
      <height>22</height>
     </rect>
    </property>
@@ -769,7 +743,7 @@
   </action>
   <action name="action_ShowConnectionPanel">
    <property name="text">
-    <string>Show Connection Panel</string>
+    <string>Toggle Connection Panel</string>
    </property>
   </action>
   <action name="action_AboutQt">
@@ -780,16 +754,20 @@
  </widget>
  <tabstops>
   <tabstop>comboBox_DBDriverType</tabstop>
-  <tabstop>lineEdit_DBDriver</tabstop>
   <tabstop>lineEdit_DBProtocol</tabstop>
   <tabstop>lineEdit_DBPort</tabstop>
+  <tabstop>lineEdit_DBDatabase</tabstop>
+  <tabstop>lineEdit_DBHostName</tabstop>
+  <tabstop>lineEdit_DBDriver</tabstop>
+  <tabstop>lineEdit_DBUsername</tabstop>
+  <tabstop>lineEdit_DBUserpassword</tabstop>
   <tabstop>pushButton_ConnectDB</tabstop>
   <tabstop>pushButton_DisconnectDB</tabstop>
-  <tabstop>plainTextEdit_SQLQuery</tabstop>
+  <tabstop>pushButton_ClearResult</tabstop>
+  <tabstop>pushButton_ClearSQLStatement</tabstop>
   <tabstop>checkBox_Stream</tabstop>
   <tabstop>pushButton_SubmitQuery</tabstop>
-  <tabstop>pushButton_ClearSQLStatement</tabstop>
-  <tabstop>pushButton_ClearResult</tabstop>
+  <tabstop>plainTextEdit_SQLQuery</tabstop>
   <tabstop>tableView_QueryResult</tabstop>
   <tabstop>plainTextEdit_Result</tabstop>
  </tabstops>
